@@ -1,0 +1,86 @@
+# 流水线默认配置
+
+pipeline:
+  # 默认阶段顺序
+  default_stages:
+    - copywriting
+    - script_splitting
+    - visual_conception
+    - asset_generation
+    - audio_generation
+    - assembly
+    - quality_check
+    - distribution
+
+  # 阶段配置
+  stages:
+    copywriting:
+      skill: "safety-copywriter"
+      timeout: 60
+      retry: 2
+
+    script_splitting:
+      skill: "script-splitter"
+      timeout: 120
+      retry: 2
+
+    visual_conception:
+      skill: "prompt-engineer"
+      timeout: 120
+      retry: 2
+
+    asset_generation:
+      skills: ["image-generator", "video-generator"]
+      timeout: 300
+      retry: 1
+      max_concurrent: 3
+
+    audio_generation:
+      skills: ["tts-narrator", "bgm-composer"]
+      timeout: 180
+      retry: 2
+
+    assembly:
+      skill: "video-assembler"
+      timeout: 300
+      retry: 1
+
+    quality_check:
+      skill: "quality-inspector"
+      timeout: 60
+      retry: 1
+
+    distribution:
+      skill: "distributor"
+      timeout: 60
+      retry: 1
+
+# 视频生成默认参数
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+  codec: "h264"
+  bitrate: "4M"
+
+# 音频默认参数
+audio:
+  sample_rate: 44100
+  channels: 2
+  bitrate: "192k"
+
+# TTS默认配置
+tts:
+  default_voice: "zh-CN-YunyangNeural"
+  rate: "+0%"
+  volume: "+0%"
+
+# 质量检查阈值
+quality:
+  min_resolution: [720, 1280]
+  target_resolution: [1080, 1920]
+  min_fps: 24
+  target_fps: 30
+  min_duration: 15
+  max_duration: 300
+  target_audio_db: -14

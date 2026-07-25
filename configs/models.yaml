@@ -1,0 +1,48 @@
+# 模型API配置文件
+# 复制此文件为 models.yaml 并填入你的API密钥
+
+providers:
+  # 豆包 (字节跳动) - 推荐用于中文文案生成
+  doubao:
+    api_key: "YOUR-DOUBAO-API-KEY"
+    base_url: "https://ark.cn-beijing.volces.com/api/v3"
+    default_model: "doubao-pro-128k"
+    description: "中文理解能力强，适合文案生成"
+
+  # Kimi (Moonshot) - 推荐用于长文本分析
+  kimi:
+    api_key: "YOUR-KIMI-API-KEY"
+    base_url: "https://api.moonshot.cn/v1"
+    default_model: "moonshot-v1-128k"
+    description: "长上下文窗口，适合长脚本分析"
+
+  # DeepSeek - 推荐用于推理和提示词优化
+  deepseek:
+    api_key: "YOUR-DEEPSEEK-API-KEY"
+    base_url: "https://api.deepseek.com/v1"
+    default_model: "deepseek-chat"
+    description: "推理能力强，性价比高，适合提示词工程"
+
+  # 通义千问 (阿里云) - 推荐用于通用任务和文生图
+  qwen:
+    api_key: "YOUR-QWEN-API-KEY"
+    base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    default_model: "qwen-max"
+    description: "中文生态完整，支持文生图"
+
+  # 万相 (通义万相) - 推荐用于视频生成
+  wanx:
+    api_key: "YOUR-WANX-API-KEY"
+    base_url: "https://dashscope.aliyuncs.com/api/v1"
+    default_model: "wanx2.1-t2v-plus"
+    description: "文生视频/图生视频，运动质量好"
+
+# 路由配置：任务类型到首选模型
+task_routing:
+  copywriting: "doubao"        # 文案生成 -> 豆包
+  script_split: "deepseek"     # 脚本拆分 -> DeepSeek
+  prompt_engineer: "deepseek"  # 提示词 -> DeepSeek
+  long_context: "kimi"         # 长文本 -> Kimi
+  general: "qwen"              # 通用 -> 通义千问
+  image_generation: "qwen"     # 文生图 -> 通义万相
+  video_generation: "wanx"     # 视频生成 -> 万相
